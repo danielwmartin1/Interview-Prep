@@ -69,7 +69,7 @@ function promptRotationInput(nums) {
     }
     rotateArray(nums, rotations);
     console.log(`Rotated array: ${nums}`);
-    rl.close();
+    rl.close(); // End the loop by closing the readline interface
   });
 }
 
