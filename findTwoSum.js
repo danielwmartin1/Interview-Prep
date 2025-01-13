@@ -21,13 +21,35 @@ function findTwoSum(target, nums) {
   return null;
 }
 
-rl.question('Enter the target number: ', (target) => {
-  rl.question('Enter the numbers separated by commas: ', (nums) => {
-    const numArray = nums.split(',').map(Number);
-    const result = findTwoSum(Number(target), numArray);
-    console.log(`Result: ${result}`);
-    rl.close();
+function isValidNumber(input) {
+  return !isNaN(input) && Number.isFinite(Number(input));
+}
+
+function isValidNumberArray(input) {
+  return input.split(',').every(num => isValidNumber(num.trim()));
+}
+
+function promptUser() {
+  rl.question('Enter the target number: ', (target) => {
+    if (!isValidNumber(target)) {
+      console.log('Invalid target number. Please enter a valid number.');
+      return promptUser();
+    }
+
+    rl.question('Enter the numbers separated by commas: ', (nums) => {
+      if (!isValidNumberArray(nums)) {
+        console.log('Invalid numbers. Please enter a list of valid numbers separated by commas.');
+        return promptUser();
+      }
+
+      const numArray = nums.split(',').map(Number);
+      const result = findTwoSum(Number(target), numArray);
+      console.log(`Result: ${result}`);
+      rl.close();
+    });
   });
-});
+}
+
+promptUser();
 
 export default findTwoSum;
