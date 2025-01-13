@@ -44,27 +44,35 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-rl.question('Enter the array elements separated by commas: ', (input) => {
-  try {
-    const nums = input.split(',').map(Number);
-    if (nums.some(isNaN)) {
-      throw new Error('Array elements should be numbers');
-    }
-    rl.question('Enter the number of rotations: ', (k) => {
-      const rotations = parseInt(k);
-      if (isNaN(rotations)) {
-        console.error('Invalid input: number of rotations should be a number');
-        rl.close();
-        return;
+function promptArrayInput() {
+  rl.question('Enter the array elements separated by commas: ', (input) => {
+    try {
+      const nums = input.split(',').map(Number);
+      if (nums.some(isNaN)) {
+        throw new Error('Array elements should be numbers');
       }
-      rotateArray(nums, rotations);
-      console.log(`Rotated array: ${nums}`);
-      rl.close();
-    });
-  } catch (error) {
-    console.error(`Error: ${error.message}`);
+      promptRotationInput(nums);
+    } catch (error) {
+      console.error(`Error: ${error.message}`);
+      promptArrayInput();
+    }
+  });
+}
+
+function promptRotationInput(nums) {
+  rl.question('Enter the number of rotations: ', (k) => {
+    const rotations = parseInt(k);
+    if (isNaN(rotations)) {
+      console.error('Invalid input: number of rotations should be a number');
+      promptRotationInput(nums);
+      return;
+    }
+    rotateArray(nums, rotations);
+    console.log(`Rotated array: ${nums}`);
     rl.close();
-  }
-});
+  });
+}
+
+promptArrayInput();
 
 export default rotateArray;
