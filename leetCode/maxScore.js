@@ -18,7 +18,7 @@ var maxScore = function(s) {
   }
 
   console.group('Initial Counts');
-  console.debug(`Initial rightOnes: ${rightOnes}`);
+  console.debug(`Initial count of '1's (rightOnes): ${rightOnes}`);
   console.groupEnd();
 
   // Iterate through the string and calculate the score at each possible split
@@ -33,9 +33,10 @@ var maxScore = function(s) {
     maxScore = Math.max(maxScore, leftZeros + rightOnes);
 
     console.group(`Index: ${i}`);
-    console.debug(`leftZeros: ${leftZeros}`);
-    console.debug(`rightOnes: ${rightOnes}`);
-    console.debug(`maxScore: ${maxScore}`);
+    console.debug(`After processing character '${s[i]}' at index ${i}:`);
+    console.debug(`Count of '0's in the left part (leftZeros): ${leftZeros}`);
+    console.debug(`Count of '1's in the right part (rightOnes): ${rightOnes}`);
+    console.debug(`Current max score: ${maxScore}`);
     console.groupEnd();
   }
 
