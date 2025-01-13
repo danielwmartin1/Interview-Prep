@@ -1,59 +1,54 @@
-import promptSync from 'prompt-sync';
+import readline from 'readline';
 
-const isValidString = function(string) {
-  const validChars = /^[a-zA-Z#]*$/;
-  return validChars.test(string);
-}
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
 
-const buildString = function(string) {
-  const builtArray = [];
-  for (let p = 0; p < string.length; p++) {
-    console.log(`Processing character ${string[p]} at index ${p}`);
-    if (string[p] !== "#") {
-      builtArray.push(string[p]);
-      console.log(`Character ${string[p]} added to builtArray: ${builtArray}`);
+function processString(str) {
+  let result = [];
+  for (let char of str) {
+    if (char === '#') {
+      if (result.length > 0) {
+        result.pop();
+      }
     } else {
-      if (builtArray.length > 0) {
-        const removedChar = builtArray.pop();
-        console.log(`Character ${removedChar} removed from builtArray: ${builtArray}`);
-      } else {
-        console.log(`No character to remove from builtArray`);
-      }
+      result.push(char);
     }
   }
-  return builtArray;
+  return result.join('');
 }
 
-const backSpaceCompare = function(S, T) {
-  if (!isValidString(S) || !isValidString(T)) {
-    console.log('Invalid input. Strings must contain only letters and the backspace character "#".');
-    return false;
+function backSpaceCompare(s, t) {
+  const finalS = processString(s);
+  const finalT = processString(t);
+
+  console.log(`Processed first string: ${finalS}`);
+  console.log(`Processed second string: ${finalT}`);
+
+  return finalS === finalT;
+}
+
+function isValidInput(input) {
+  return typeof input === 'string';
+}
+
+rl.question('Enter first string: ', (s) => {
+  if (!isValidInput(s)) {
+    console.error('Invalid input. Please enter a valid string.');
+    rl.close();
+    return;
   }
 
-  console.log(`Comparing strings S: "${S}" and T: "${T}"`);
-  const finalS = buildString(S);
-  const finalT = buildString(T);
-  console.log(`Final built string for S: ${finalS}`);
-  console.log(`Final built string for T: ${finalT}`);
-  if (finalS.length !== finalT.length) {
-    console.log(`Length mismatch: finalS.length (${finalS.length}) !== finalT.length (${finalT.length})`);
-    return false;
-  } else {
-    for (let p = 0; p < finalS.length; p++) {
-      if (finalS[p] !== finalT[p]) {
-        console.log(`Mismatch found at position ${p}: ${finalS[p]} !== ${finalT[p]}`);
-        return false;
-      }
+  rl.question('Enter second string: ', (t) => {
+    if (!isValidInput(t)) {
+      console.error('Invalid input. Please enter a valid string.');
+      rl.close();
+      return;
     }
-  }
-  console.log(`Strings are equal after processing backspaces`);
-  return true;
-}
 
-const prompt = promptSync();
-
-const S = prompt('Enter the first string: ');
-const T = prompt('Enter the second string: ');
-console.log(backSpaceCompare(S, T));
-
-export default backSpaceCompare;
+    const result = backSpaceCompare(s, t);
+    console.log(`The strings are ${result ? 'equal' : 'not equal'} after processing backspaces.`);
+    rl.close();
+  });
+});
