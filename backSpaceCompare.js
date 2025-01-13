@@ -2,9 +2,9 @@ import promptSync from 'prompt-sync';
 
 const buildString = function(string) {
   const builtArray = [];
-  for(let p = 0; p < string.length; p++) {
+  for (let p = 0; p < string.length; p++) {
     console.log(`Processing character ${string[p]} at index ${p}`);
-    if(string[p] !== "#") {
+    if (string[p] !== "#") {
       builtArray.push(string[p]);
       console.log(`Character ${string[p]} added to builtArray: ${builtArray}`);
     } else {
@@ -25,12 +25,12 @@ const backSpaceCompare = function(S, T) {
   const finalT = buildString(T);
   console.log(`Final built string for S: ${finalS}`);
   console.log(`Final built string for T: ${finalT}`);
-  if(finalS.length !== finalT.length) {
+  if (finalS.length !== finalT.length) {
     console.log(`Length mismatch: finalS.length (${finalS.length}) !== finalT.length (${finalT.length})`);
     return false;
   } else {
-    for(let p = 0; p < finalS.length; p++) {
-      if(finalS[p] !== finalT[p]) {
+    for (let p = 0; p < finalS.length; p++) {
+      if (finalS[p] !== finalT[p]) {
         console.log(`Mismatch found at position ${p}: ${finalS[p]} !== ${finalT[p]}`);
         return false;
       }
