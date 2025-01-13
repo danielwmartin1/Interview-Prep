@@ -1,27 +1,27 @@
 import * as exp from "constants";
 import readline from 'readline';
 
-function maxProfit(prices) {
+function buyingTheDip(prices) {
   if (!Array.isArray(prices) || prices.some(price => typeof price !== 'number' || price < 0)) {
     console.error("Invalid input: prices should be an array of non-negative numbers.");
     return null;
   }
 
   let minPrice = Infinity; // Track the minimum price encountered
-  let maxProfit = 0;       // Track the maximum profit
+  let buyingTheDip = 0;       // Track the maximum profit
   
   for (let price of prices) {
-      console.debug(`Current price: ${price}, Min price: ${minPrice}, Max profit: ${maxProfit}`);
+      console.debug(`Current price: ${price}, Min price: ${minPrice}, Max profit: ${buyingTheDip}`);
       if (price < minPrice) {
           minPrice = price; // Update the minimum price
           console.debug(`Updated min price to: ${minPrice}`);
-      } else if (price - minPrice > maxProfit) {
-          maxProfit = price - minPrice; // Update the maximum profit
-          console.debug(`Updated max profit to: ${maxProfit}`);
+      } else if (price - minPrice > buyingTheDip) {
+          buyingTheDip = price - minPrice; // Update the maximum profit
+          console.debug(`Updated max profit to: ${buyingTheDip}`);
       }
   }
   
-  return maxProfit;
+  return buyingTheDip;
 }
 
 function getValidPrices(callback) {
@@ -50,8 +50,8 @@ function getValidPrices(callback) {
 }
 
 getValidPrices((prices) => {
-  const profit = maxProfit(prices);
+  const profit = buyingTheDip(prices);
   console.log(`Maximum profit: ${profit}`);
 });
 
-export default maxProfit;
+export default buyingTheDip;
