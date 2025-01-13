@@ -27,11 +27,20 @@ const maxArea = function (height) {
   return maxArea;
 };
 
-rl.question('Enter heights separated by commas: ', (answer) => {
-  const height = answer.split(',').map(Number);
-  console.log('Input heights:', height);
-  console.log('Maximum area:', maxArea(height));
-  rl.close();
-});
+const askQuestion = () => {
+  rl.question('Enter heights separated by commas: ', (answer) => {
+    const height = answer.split(',').map(Number);
+    if (height.some(isNaN)) {
+      console.log('Invalid input. Please enter numbers separated by commas.');
+      askQuestion();
+    } else {
+      console.log('Input heights:', height);
+      console.log('Maximum area:', maxArea(height));
+      rl.close();
+    }
+  });
+};
+
+askQuestion();
 
 export default maxArea;
