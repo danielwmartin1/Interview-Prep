@@ -33,9 +33,18 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-rl.question('Enter a path to simplify: ', (path) => {
-  simplifyPath(path);
-  rl.close();
-});
+function askForPath() {
+  rl.question('Enter a path to simplify: ', (path) => {
+    if (path.trim() === '') {
+      console.log('Invalid input. Please enter a non-empty path.');
+      askForPath(); // Loop back to the rl.question call
+    } else {
+      simplifyPath(path);
+      rl.close();
+    }
+  });
+}
+
+askForPath();
 
 export default simplifyPath;

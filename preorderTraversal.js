@@ -52,12 +52,30 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-rl.question('Enter the tree nodes as an array (e.g., [1,null,2,3]): ', (input) => {
-  const arr = JSON.parse(input);
-  const root = createBinaryTree(arr);
-  const result = preorderTraversal(root);
-  console.log('Preorder Traversal Result:', result);
-  rl.close();
-});
+function isValidInput(input) {
+  try {
+      const arr = JSON.parse(input);
+      return Array.isArray(arr);
+  } catch (e) {
+      return false;
+  }
+}
+
+function askQuestion() {
+  rl.question('Enter the tree nodes as an array (e.g., [1,null,2,3]): ', (input) => {
+      if (isValidInput(input)) {
+          const arr = JSON.parse(input);
+          const root = createBinaryTree(arr);
+          const result = preorderTraversal(root);
+          console.log('Preorder Traversal Result:', result);
+          rl.close();
+      } else {
+          console.log('Invalid input. Please enter a valid array.');
+          askQuestion();
+      }
+  });
+}
+
+askQuestion();
 
 export default preorderTraversal;
