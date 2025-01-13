@@ -6,6 +6,7 @@ const rl = readline.createInterface({
 });
 
 function findTwoSum(target, nums) {
+  console.log(`Starting findTwoSum with target: ${target} and nums: ${nums}`);
   for (let p1 = 0; p1 < nums.length; p1++) {
     const numberToFind = target - nums[p1];
     console.log(`Checking: nums[${p1}] = ${nums[p1]}, numberToFind = ${numberToFind}`);
@@ -22,12 +23,14 @@ function findTwoSum(target, nums) {
 }
 
 function isValidNumber(input) {
+  console.log(`Validating target number: ${input}`);
   if (isNaN(input) || !Number.isFinite(Number(input))) {
     throw new Error('Invalid target number. Please enter a valid number.');
   }
 }
 
 function isValidNumberArray(input) {
+  console.log(`Validating number array: ${input}`);
   if (!input.split(',').every(num => !isNaN(num.trim()) && Number.isFinite(Number(num.trim())))) {
     throw new Error('Invalid numbers. Please enter a list of valid numbers separated by commas.');
   }
@@ -51,6 +54,7 @@ function promptUser() {
       }
 
       const numArray = nums.split(',').map(Number);
+      console.log(`Parsed number array: ${numArray}`);
       const result = findTwoSum(Number(target), numArray);
       console.log(`Result: ${result}`);
       rl.close();
