@@ -32,10 +32,10 @@ var maxScore = function(s) {
     // Update the maximum score after this split
     maxScore = Math.max(maxScore, leftZeros + rightOnes);
 
+    // Log the current index being processed
     console.group(`Index: ${i}`);
-    console.debug(`After processing character '${s[i]}' at index ${i}:`);
-    console.debug(`Count of '0's in the left part (leftZeros): ${leftZeros}`);
-    console.debug(`Count of '1's in the right part (rightOnes): ${rightOnes}`);
+    console.debug(`Character '${s[i]}' at index ${i}`);
+    console.debug(`leftZeros: ${leftZeros}, rightOnes: ${rightOnes}`);
     console.debug(`Current max score: ${maxScore}`);
     console.groupEnd();
   }
