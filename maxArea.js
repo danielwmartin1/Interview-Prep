@@ -33,3 +33,5 @@ rl.question('Enter heights separated by commas: ', (answer) => {
   console.log('Maximum area:', maxArea(height));
   rl.close();
 });
+
+export default maxArea;

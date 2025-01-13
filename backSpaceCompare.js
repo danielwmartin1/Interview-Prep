@@ -45,3 +45,5 @@ const prompt = promptSync();
 const S = prompt('Enter the first string: ');
 const T = prompt('Enter the second string: ');
 console.log(backSpaceCompare(S, T));
+
+export default backSpaceCompare;

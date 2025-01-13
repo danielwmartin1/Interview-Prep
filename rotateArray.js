@@ -1,6 +1,15 @@
 import readline from 'readline';
 
-var rotate = function(nums, k) {
+var rotateArray = function(nums, k) {
+  if (!Array.isArray(nums)) {
+    console.error('Invalid input: nums should be an array');
+    return;
+  }
+  if (typeof k !== 'number' || isNaN(k)) {
+    console.error('Invalid input: k should be a number');
+    return;
+  }
+
   const n = nums.length;
   k = k % n; // To handle cases where k > n
 
@@ -21,7 +30,9 @@ var rotate = function(nums, k) {
 };
 
 function reverse(arr, start, end) {
+  console.log(`Reversing from index ${start} to ${end}`);
   while (start < end) {
+    console.log(`Swapping elements at index ${start} and ${end}`);
     [arr[start], arr[end]] = [arr[end], arr[start]];
     start++;
     end--;
@@ -34,12 +45,26 @@ const rl = readline.createInterface({
 });
 
 rl.question('Enter the array elements separated by commas: ', (input) => {
-  const nums = input.split(',').map(Number);
-  rl.question('Enter the number of rotations: ', (k) => {
-    rotate(nums, parseInt(k));
-    console.log(`Rotated array: ${nums}`);
+  try {
+    const nums = input.split(',').map(Number);
+    if (nums.some(isNaN)) {
+      throw new Error('Array elements should be numbers');
+    }
+    rl.question('Enter the number of rotations: ', (k) => {
+      const rotations = parseInt(k);
+      if (isNaN(rotations)) {
+        console.error('Invalid input: number of rotations should be a number');
+        rl.close();
+        return;
+      }
+      rotateArray(nums, rotations);
+      console.log(`Rotated array: ${nums}`);
+      rl.close();
+    });
+  } catch (error) {
+    console.error(`Error: ${error.message}`);
     rl.close();
-  });
+  }
 });
 
-export default rotate;
+export default rotateArray;
