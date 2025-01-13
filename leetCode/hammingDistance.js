@@ -22,16 +22,21 @@ const hammingDistance = (x, y) => {
   return distance;
 };
 
-readline.question('Enter the first integer: ', (x) => {
-  readline.question('Enter the second integer: ', (y) => {
-    const num1 = parseInt(x, 10);
-    const num2 = parseInt(y, 10);
+const getInput = () => {
+  readline.question('Enter the first integer: ', (x) => {
+    readline.question('Enter the second integer: ', (y) => {
+      const num1 = parseInt(x, 10);
+      const num2 = parseInt(y, 10);
 
-    if (isNaN(num1) || isNaN(num2)) {
-      console.error('Invalid input. Please enter valid integers.');
-    } else {
-      console.log(`Hamming Distance between ${num1} and ${num2}: ${hammingDistance(num1, num2)}`);
-    }
-    readline.close();
+      if (isNaN(num1) || isNaN(num2)) {
+        console.error('Invalid input. Please enter valid integers.');
+        getInput(); // Loop back to get input again
+      } else {
+        console.log(`Hamming Distance between ${num1} and ${num2}: ${hammingDistance(num1, num2)}`);
+        readline.close();
+      }
+    });
   });
-});
+};
+
+getInput();
