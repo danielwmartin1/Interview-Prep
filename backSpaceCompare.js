@@ -1,5 +1,10 @@
 import promptSync from 'prompt-sync';
 
+const isValidString = function(string) {
+  const validChars = /^[a-zA-Z#]*$/;
+  return validChars.test(string);
+}
+
 const buildString = function(string) {
   const builtArray = [];
   for (let p = 0; p < string.length; p++) {
@@ -20,6 +25,11 @@ const buildString = function(string) {
 }
 
 const backSpaceCompare = function(S, T) {
+  if (!isValidString(S) || !isValidString(T)) {
+    console.log('Invalid input. Strings must contain only letters and the backspace character "#".');
+    return false;
+  }
+
   console.log(`Comparing strings S: "${S}" and T: "${T}"`);
   const finalS = buildString(S);
   const finalT = buildString(T);
