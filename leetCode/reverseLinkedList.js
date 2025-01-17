@@ -1,10 +1,3 @@
-import readline from 'readline';
-
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
-
 const reverseLinkedList = function (head) {
   let prev = null;
   let current = head;
@@ -45,22 +38,11 @@ function printLinkedList(head) {
   console.log(result.join(' -> '));
 }
 
-rl.question('Enter the elements of the linked list separated by spaces: ', (answer) => {
-  const elements = answer.split(' ').map(Number);
-  if (elements.some(isNaN)) {
-    console.error('Invalid input: Please enter only numbers separated by spaces.');
-    rl.close();
-    return;
-  }
-  const head = createLinkedListFromArray(elements);
-  if (!head) {
-    rl.close();
-    return;
-  }
-  console.log('Original Linked List:');
-  printLinkedList(head);
-  const reversedHead = reverseLinkedList(head);
-  console.log('Reversed Linked List:');
-  printLinkedList(reversedHead);
-  rl.close();
-});
+// Predefined input for debugging
+const elements = [1, 2, 3, 4, 5];
+const head = createLinkedListFromArray(elements);
+console.log('Original Linked List:');
+printLinkedList(head);
+const reversedHead = reverseLinkedList(head);
+console.log('Reversed Linked List:');
+printLinkedList(reversedHead);
