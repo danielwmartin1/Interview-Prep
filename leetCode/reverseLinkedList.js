@@ -17,9 +17,11 @@ const reverseLinkedList = function (head) {
   return prev;
 };
 
-function ListNode(val, next = null) {
-  this.val = val;
-  this.next = next;
+class ListNode {
+  constructor(val, next = null) {
+    this.val = val;
+    this.next = next;
+  }
 }
 
 function createLinkedListFromArray(arr) {

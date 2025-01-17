@@ -1,33 +1,29 @@
 // Function to reverse a linked list between positions m and n
 const reverseBetween = (head, m, n) => {
+  // If the list is empty or m and n are the same, no need to reverse
   if (!head || m === n) return head;
 
-  // Create a dummy node to handle edge cases
-  const dummy = new ListNode(0);
-  dummy.next = head;
-  let prev = dummy;
+  // Create a new node to act as the starting point
+  const index = new ListNode(0);
+  index.next = head;
+  let prev = index;
 
-  console.log(`Initial list: ${listToString(dummy.next)}`);
-
-  // Move prev to the node before the start of the reversal
+  // Move prev to the node just before the m-th node
   for (let i = 0; i < m - 1; i++) {
     prev = prev.next;
   }
 
-  console.log(`Node before reversal starts: ${prev.val}`);
-
+  // Start reversing the sublist from m to n
   let current = prev.next;
-  // Reverse the sublist from m to n
   for (let i = 0; i < n - m; i++) {
-    const next = current.next;
-    current.next = next.next;
-    next.next = prev.next;
-    prev.next = next;
-
-    console.log(`Reversing: ${listToString(dummy.next)}`);
+    const next = current.next; // Store the next node
+    current.next = next.next; // Remove next from the sublist
+    next.next = prev.next; // Insert next at the beginning of the reversed sublist
+    prev.next = next; // Update prev to point to the new head of the sublist
   }
 
-  return dummy.next;
+  // Return the new head of the list
+  return index.next;
 };
 
 // Definition for singly-linked list node
@@ -39,7 +35,7 @@ class ListNode {
 }
 
 // Helper function to create a linked list from an array
-function createLinkedListFromArray(arr) {
+const createLinkedListFromArray = (arr) => {
   if (arr.length === 0) return null;
   const head = new ListNode(arr[0]);
   let current = head;
@@ -48,10 +44,10 @@ function createLinkedListFromArray(arr) {
     current = current.next;
   }
   return head;
-}
+};
 
 // Helper function to print a linked list
-function printLinkedList(head) {
+const printLinkedList = (head) => {
   const result = [];
   let current = head;
   while (current) {
@@ -59,18 +55,7 @@ function printLinkedList(head) {
     current = current.next;
   }
   console.log(result.join(' -> '));
-}
-
-// Helper function to convert a linked list to a string
-function listToString(head) {
-  const result = [];
-  let current = head;
-  while (current) {
-    result.push(current.val);
-    current = current.next;
-  }
-  return result.join(' -> ');
-}
+};
 
 // Sample linked list and positions for debugging
 const elements = [1, 2, 3, 4, 5];
