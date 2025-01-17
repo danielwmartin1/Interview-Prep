@@ -1,11 +1,11 @@
-const reverseLinkedList = function (head) {
+const reverseLinkedList = function (headNode) {
   let prev = null;
-  let current = head;
-  while (current) {
-    const next = current.next;
-    current.next = prev;
-    prev = current;
-    current = next;
+  let currentNode = headNode;
+  while (currentNode) {
+    const next = currentNode.next;
+    currentNode.next = prev;
+    prev = currentNode;
+    currentNode = next;
   }
   return prev;
 };
@@ -19,30 +19,30 @@ class ListNode {
 
 function createLinkedListFromArray(arr) {
   if (arr.length === 0) return null;
-  const head = new ListNode(arr[0]);
-  let current = head;
+  const headNode = new ListNode(arr[0]);
+  let currentNode = headNode;
   for (let i = 1; i < arr.length; i++) {
-    current.next = new ListNode(arr[i]);
-    current = current.next;
+    currentNode.next = new ListNode(arr[i]);
+    currentNode = currentNode.next;
   }
-  return head;
+  return headNode;
 }
 
-function printLinkedList(head) {
+function printLinkedList(headNode) {
   const result = [];
-  let current = head;
-  while (current) {
-    result.push(current.val);
-    current = current.next;
+  let currentNode = headNode;
+  while (currentNode) {
+    result.push(currentNode.val);
+    currentNode = currentNode.next;
   }
   console.log(result.join(' -> '));
 }
 
 // Predefined input for debugging
 const elements = [1, 2, 3, 4, 5];
-const head = createLinkedListFromArray(elements);
+const headNode = createLinkedListFromArray(elements);
 console.log('Original Linked List:');
-printLinkedList(head);
-const reversedHead = reverseLinkedList(head);
+printLinkedList(headNode);
+const reversedheadNode = reverseLinkedList(headNode);
 console.log('Reversed Linked List:');
-printLinkedList(reversedHead);
+printLinkedList(reversedheadNode);
