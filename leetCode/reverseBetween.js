@@ -1,5 +1,3 @@
-import readline from 'readline';
-
 // Function to reverse a linked list between positions m and n
 const reverseBetween = (head, m, n) => {
   if (!head || m === n) return head;
@@ -9,10 +7,14 @@ const reverseBetween = (head, m, n) => {
   dummy.next = head;
   let prev = dummy;
 
+  console.log(`Initial list: ${listToString(dummy.next)}`);
+
   // Move prev to the node before the start of the reversal
   for (let i = 0; i < m - 1; i++) {
     prev = prev.next;
   }
+
+  console.log(`Node before reversal starts: ${prev.val}`);
 
   let current = prev.next;
   // Reverse the sublist from m to n
@@ -21,6 +23,8 @@ const reverseBetween = (head, m, n) => {
     current.next = next.next;
     next.next = prev.next;
     prev.next = next;
+
+    console.log(`Reversing: ${listToString(dummy.next)}`);
   }
 
   return dummy.next;
@@ -57,61 +61,30 @@ function printLinkedList(head) {
   console.log(result.join(' -> '));
 }
 
-// Create a readline interface for user input
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
-
-// Function to prompt the user for linked list elements
-function promptForLinkedList() {
-  rl.question('Enter the elements of the linked list separated by spaces: ', (answer) => {
-    const elements = answer.split(' ').map(Number);
-    if (elements.some(isNaN)) {
-      console.error('Invalid input: Please enter only numbers separated by spaces.');
-      return promptForLinkedList();
-    }
-
-    const head = createLinkedListFromArray(elements);
-    if (!head) {
-      return promptForLinkedList();
-    }
-
-    promptForPositions(head, elements.length);
-  });
+// Helper function to convert a linked list to a string
+function listToString(head) {
+  const result = [];
+  let current = head;
+  while (current) {
+    result.push(current.val);
+    current = current.next;
+  }
+  return result.join(' -> ');
 }
 
-// Function to prompt the user for start and end positions for reversal
-function promptForPositions(head, length) {
-  rl.question('Enter the start position (m): ', (mAnswer) => {
-    const m = parseInt(mAnswer);
-    if (isNaN(m) || m < 1 || m > length) {
-      console.error('Invalid input: Please enter a valid start position.');
-      return promptForPositions(head, length);
-    }
+// Sample linked list and positions for debugging
+const elements = [1, 2, 3, 4, 5];
+const head = createLinkedListFromArray(elements);
+const m = 2;
+const n = 4;
 
-    rl.question('Enter the end position (n): ', (nAnswer) => {
-      const n = parseInt(nAnswer);
-      if (isNaN(n) || n < m || n > length) {
-        console.error('Invalid input: Please enter a valid end position.');
-        return promptForPositions(head, length);
-      }
+console.log('Original Linked List:');
+printLinkedList(head);
 
-      console.log('Original Linked List:');
-      printLinkedList(head);
+console.log(`Reversing the linked list between positions ${m} and ${n}...`);
+const reversedHead = reverseBetween(head, m, n);
 
-      console.log(`Reversing the linked list between positions ${m} and ${n}...`);
-      const reversedHead = reverseBetween(head, m, n);
-
-      console.log('Reversed Linked List:');
-      printLinkedList(reversedHead);
-
-      rl.close();
-    });
-  });
-}
-
-// Start the prompt for linked list input
-promptForLinkedList();
+console.log('Reversed Linked List:');
+printLinkedList(reversedHead);
 
 export default reverseBetween;
