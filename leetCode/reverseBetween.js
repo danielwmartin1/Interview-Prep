@@ -1,17 +1,21 @@
 import readline from 'readline';
 
+// Function to reverse a linked list between positions m and n
 const reverseBetween = (head, m, n) => {
   if (!head || m === n) return head;
 
+  // Create a dummy node to handle edge cases
   const dummy = new ListNode(0);
   dummy.next = head;
   let prev = dummy;
 
+  // Move prev to the node before the start of the reversal
   for (let i = 0; i < m - 1; i++) {
     prev = prev.next;
   }
 
   let current = prev.next;
+  // Reverse the sublist from m to n
   for (let i = 0; i < n - m; i++) {
     const next = current.next;
     current.next = next.next;
@@ -22,6 +26,7 @@ const reverseBetween = (head, m, n) => {
   return dummy.next;
 };
 
+// Definition for singly-linked list node
 class ListNode {
   constructor(val, next = null) {
     this.val = val;
@@ -29,6 +34,7 @@ class ListNode {
   }
 }
 
+// Helper function to create a linked list from an array
 function createLinkedListFromArray(arr) {
   if (arr.length === 0) return null;
   const head = new ListNode(arr[0]);
@@ -40,6 +46,7 @@ function createLinkedListFromArray(arr) {
   return head;
 }
 
+// Helper function to print a linked list
 function printLinkedList(head) {
   const result = [];
   let current = head;
@@ -50,11 +57,13 @@ function printLinkedList(head) {
   console.log(result.join(' -> '));
 }
 
+// Create a readline interface for user input
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 });
 
+// Function to prompt the user for linked list elements
 function promptForLinkedList() {
   rl.question('Enter the elements of the linked list separated by spaces: ', (answer) => {
     const elements = answer.split(' ').map(Number);
@@ -72,6 +81,7 @@ function promptForLinkedList() {
   });
 }
 
+// Function to prompt the user for start and end positions for reversal
 function promptForPositions(head, length) {
   rl.question('Enter the start position (m): ', (mAnswer) => {
     const m = parseInt(mAnswer);
@@ -101,6 +111,7 @@ function promptForPositions(head, length) {
   });
 }
 
+// Start the prompt for linked list input
 promptForLinkedList();
 
 export default reverseBetween;
