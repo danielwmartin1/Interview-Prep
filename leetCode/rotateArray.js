@@ -1,6 +1,6 @@
 import readline from 'readline';
 
-var rotateArray = function(nums, k) {
+const rotateArray = function(nums, k) {
   if (!Array.isArray(nums)) {
     console.error('Invalid input: nums should be an array');
     return;

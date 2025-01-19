@@ -1,4 +1,4 @@
-var canCompleteCircuit = function(gas, cost) {
+const canCompleteCircuit = function(gas, cost) {
     let totalGas = 0;
     let totalCost = 0;
     let tank = 0;

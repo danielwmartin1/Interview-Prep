@@ -1,6 +1,6 @@
 import readline from 'readline';
 
-var preorderTraversal = function(root) {
+const preorderTraversal = function(root) {
   if (!root) return []; // Handle edge case for empty tree
   
   const result = [];

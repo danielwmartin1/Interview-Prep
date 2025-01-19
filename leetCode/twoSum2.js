@@ -3,7 +3,7 @@
  * @param {number} target
  * @return {number[]}
  */
-var twoSum = function(numbers, target) {
+const twoSum = function(numbers, target) {
   // Input validation
   if (!Array.isArray(numbers) || typeof target !== 'number') {
     console.error('Invalid input: numbers should be an array and target should be a number');

@@ -1,6 +1,6 @@
 import readline from 'readline';
 
-var maxScore = function(s) {
+const maxScore = function(s) {
   if (typeof s !== 'string' || !/^[01]+$/.test(s)) {
     throw new Error('Input must be a string containing only 0s and 1s');
   }

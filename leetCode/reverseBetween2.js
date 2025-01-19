@@ -20,7 +20,7 @@ const printList = (head) => {
 
 // --------- Our solution -----------
 
-var reverseBetween = function(head, m, n) {
+const reverseBetween = function(head, m, n) {
   let currentPos = 1, currentNode = head;
   let start = head;
   
